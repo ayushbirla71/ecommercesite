@@ -482,6 +482,7 @@ ul {
 }
 
 .quantity_buttons {
+    
     position: absolute;
     top: 0;
     right: 0;
@@ -492,6 +493,7 @@ ul {
 
 .quantity_inc,
 .quantity_dec {
+
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
@@ -515,6 +517,7 @@ ul {
 }
 
 .quantity_inc {
+   
     padding-bottom: 2px;
     justify-content: flex-end;
     border-top-right-radius: 5px

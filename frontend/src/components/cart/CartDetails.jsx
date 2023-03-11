@@ -11,6 +11,7 @@ const CartDetails = () => {
   let [items, setItemsList] = useState([]);
   let [products, setproductlist] = useState([]);
   const { productId, category } = useParams();
+  let navigate = useNavigate();
 
   if (token == 0) {
     setToken(localStorage.getItem("Token"));
@@ -24,11 +25,12 @@ const CartDetails = () => {
       headers: { Authorization: `Bearer ${token}` },
     };
     console.log(userId);
-    fetchDataFromApi(Obj).then((res) => {
-      console.log(res.items);
-      setcartDetails(res);
-      setItemsList(res.items);
-    });
+    fetchDataFromApi(Obj)
+      .then((res) => {
+        console.log(res.items);
+        setcartDetails(res);
+        setItemsList(res.items);
+      })
   }
 
   if (products.length == 0) {
@@ -42,46 +44,46 @@ const CartDetails = () => {
       setproductlist(res);
     });
   }
-  let incressProductQuantity=(Id)=>{
-	let Obj = {
-		method: "post",
-		
-		headers: { Authorization: `Bearer ${token}` },
-		url: `http://localhost:3001/users/${userId}/cart`,
+  let incressProductQuantity = (Id) => {
+    let Obj = {
+      method: "post",
 
-		data:{
-			productId:Id,
-			removeProduct:1
-		},
-	  };
-	  fetchDataFromApi(Obj).then((res) => {
-		console.log(res);
-		setcartDetails(res);
-		setItemsList(res.items);
-	  });
-  }
+      headers: { Authorization: `Bearer ${token}` },
+      url: `http://localhost:3001/users/${userId}/cart`,
 
-  let decressProductQuantity=(Id)=>{
-	let Obj = {
-		method: "put",
-		
-		headers: { Authorization: `Bearer ${token}` },
-		url: `http://localhost:3001/users/${userId}/cart`,
+      data: {
+        productId: Id,
+        removeProduct: 1,
+      },
+    };
+    fetchDataFromApi(Obj).then((res) => {
+      console.log(res);
+      setcartDetails(res);
+      setItemsList(res.items);
+    });
+  };
 
-		data:{
-			productId:Id,
-			removeProduct:1
-		},
-	  };
-	  fetchDataFromApi(Obj).then((res) => {
-		console.log(res);
-		setcartDetails(res);
-		setItemsList(res.items);
-	  });
-  }
+  let decressProductQuantity = (Id) => {
+    let Obj = {
+      method: "put",
+
+      headers: { Authorization: `Bearer ${token}` },
+      url: `http://localhost:3001/users/${userId}/cart`,
+
+      data: {
+        productId: Id,
+        removeProduct: 1,
+      },
+    };
+    fetchDataFromApi(Obj).then((res) => {
+      console.log(res);
+      setcartDetails(res);
+      setItemsList(res.items);
+    });
+  };
 
   return (
-    <div>
+    <div >
       <Header />
       <main className="page">
         <section className="shopping-cart dark">
@@ -97,10 +99,10 @@ const CartDetails = () => {
                       return (
                         <div className="product">
                           <div className="row">
-                            <div className="col-md-3">
+                            <div className="col-md-3" >
                               <img
                                 className="img-fluid mx-auto d-block image"
-                                style={{ width: "180px" }}
+                                style={{ width: "100%", height:'100%' }}
                                 src={item ? item.productId.productImage : ""}
                               />
                             </div>
@@ -130,18 +132,34 @@ const CartDetails = () => {
                                   </div>
                                   <div className="col-md-4 quantity">
                                     <label for="quantity">Quantity:</label>
-									<div style={{textAlign:"center"}}>
-
-									<button onClick={()=>{incressProductQuantity(item.productId._id);}} > + </button>
-                                    <input
-                                      id="quantity"
-                                      type="number"
-                                      value={item ? item.quantity : ""}
-                                      className="form-control quantity-input"
-                                    />
-									<button onClick={()=>{decressProductQuantity(item.productId._id);}}> - </button>
-									</div>
-									
+                                    <div style={{ textAlign: "center" }}>
+                                      <button
+                                        onClick={() => {
+                                          incressProductQuantity(
+                                            item.productId._id
+                                          );
+                                        }}
+                                      >
+                                        {" "}
+                                        +{" "}
+                                      </button>
+                                      <input
+                                        id="quantity"
+                                        type="number"
+                                        value={item ? item.quantity : ""}
+                                        className="form-control quantity-input"
+                                      />
+                                      <button
+                                        onClick={() => {
+                                          decressProductQuantity(
+                                            item.productId._id
+                                          );
+                                        }}
+                                      >
+                                        {" "}
+                                        -{" "}
+                                      </button>
+                                    </div>
                                   </div>
                                   <div className="col-md-3 price">
                                     <span>
@@ -199,22 +217,25 @@ const CartDetails = () => {
               display: "flex",
               overflowX: "auto",
               paddingTop: "30px",
+              msOverflowStyle:"none",
+              scrollbarWidth:"none"
+              
             }}
           >
             {products.map((item, index) => {
               return (
-                <div className="col-sm-4">
+                <div className="col-sm-4" >
                   <div
                     className="panel panel-primary"
                     style={{ width: "300px" }}
                   >
                     <div className="panel-heading">{item.title}</div>
-                    <div className="panel-body">
+                    <div className="panel-body"style={{display:'flex', justifyContent:"center"}}>
                       <a href={`/productDetails/${item._id}/${item.category}`}>
                         <img
                           src={item.productImage}
                           className="img-responsive"
-                          style={{ width: "100%" }}
+                          style={{ width: "100%", height: "100%" }}
                           alt="Image"
                         />
                       </a>

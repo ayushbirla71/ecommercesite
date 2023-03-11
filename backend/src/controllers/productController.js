@@ -7,10 +7,10 @@ const { isValidObjectId, isValidString, isValidBody } = require('../validators/v
 
 const createProduct = async (req, res) => {
     try {
-        let files = req.files
+       // let files = req.files
         let ProductData = req.body
         if(Object.keys(ProductData).length==0)return res.status(400).send({status:false,message:"body cant be empty"})
-        let {title, description, isFreeShipping, price, currencyId, availableSizes, style, installments, currencyFormat, category} = ProductData
+        let {title, description, isFreeShipping, price, currencyId, availableSizes, style, installments, currencyFormat,category ,gender,ratings,reviews,comments,moduleNumber,ram,InternlStorage,processer,frontcam,backcam,warranty,genretion,screenSize,suitablelity,brand,color,imagUrl,productImageList} = ProductData
         if (!title)return res.status(400).send({ status: false, message: "Please provide title" })
         if (!isValidString(title)) {return res.status(400).send({ status: false, message: "Please provide valid title" })}
         let duplicateTitle = await productModel.findOne({ title })
@@ -24,18 +24,30 @@ const createProduct = async (req, res) => {
             if (currencyId != "INR")return res.status(400).send({ status: false, message: "Please provide INR only" })
         }
         else{currencyId="INR"}
-        if(!availableSizes) return res.status(400).send({status:false,message:"Pls provide available sizes"})
-        if (availableSizes) {
-            let arr2 = ["S", "XS", "M", "X", "L", "XXL", "XL"]
-            let arr = availableSizes.trim().split(",")
-            const multipleExist = arr.every(value => {
-                return arr2.includes(value);
-            });
-            if (multipleExist == false) {
-                return res.status(400).send({ status: false, message: "pls provide valid size(S, XS, M, X, L, XXL, XL)" })
+        // if(!availableSizes) return res.status(400).send({status:false,message:"Pls provide available sizes"})
+        // if (availableSizes) {
+        //     let arr2 = ["S", "XS", "M", "X", "L", "XXL", "XL"]
+        //     let arr = availableSizes.trim().split(",")
+        //     const multipleExist = arr.every(value => {
+        //         return arr2.includes(value);
+        //     });
+        //     if (multipleExist == false) {
+        //         return res.status(400).send({ status: false, message: "pls provide valid size(S, XS, M, X, L, XXL, XL)" })
 
-            }
-            availableSizes = arr
+        //     }
+        //     availableSizes = arr
+        // }
+        if(ram){
+            let ramdd = ram.trim().split(",")
+            ram=ramdd
+        }
+        if(InternlStorage){
+            let intdd = InternlStorage.trim().split(",")
+            InternlStorage=intdd
+        }
+        if(productImageList){
+            let pplist = productImageList.trim().split(',')
+            productImageList=pplist
         }
         if (currencyFormat) {
             if (currencyFormat != '₹') {
@@ -48,11 +60,12 @@ const createProduct = async (req, res) => {
         price = Number(price)
         ProductData.price = price.toFixed(2)
 
-        if (files.length == 0) {
-            return res.status(400).send({ status: false, message: "Please provide Profile Image" })
-        }
-        let productImage = await getImage(files)
-        const data = { title, description, price, currencyId, currencyFormat, isFreeShipping, style, availableSizes, installments, productImage,category }
+        // if (files.length == 0) {
+        //     return res.status(400).send({ status: false, message: "Please provide Profile Image" })
+        // }
+        // let productImage = await getImage(files)
+        let productImage = imagUrl;
+        const data = { title, description, price, currencyId, currencyFormat, isFreeShipping, style, availableSizes, installments, productImage,category ,gender,ratings,reviews,comments,moduleNumber,ram,InternlStorage,processer,frontcam,backcam,warranty,genretion,screenSize,suitablelity,brand,color,productImageList}
 
         let finalProduct = await productModel.create(data)
         return res.status(201).send({ status: true, message: 'Success', data: finalProduct })

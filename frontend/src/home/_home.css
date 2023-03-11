@@ -13,3 +13,20 @@
     background-color: #f2f2f2;
     padding: 25px;
   }
+
+  /* .row{
+    height: 350px;
+  } */
+
+  /* .col-sm-4{
+    height: 200px;
+  } */
+
+  .panel-panel-primary {
+    height: 200px;
+  }
+
+  .panel-body{
+    width: 250px;
+    height: 200px;
+  }

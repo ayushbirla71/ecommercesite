@@ -1,56 +1,57 @@
 import React, { useState } from "react";
 import { fetchDataFromApi } from "../../utils/api";
 import "./userLogin.css";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Header from "../header/Header";
 
 const UserLogin = () => {
-    let [userData,setUserData]=useState();
-    let [email,setEmail] = useState("");
-    let [password,setPassword] = useState("");
+  let [userData, setUserData] = useState();
+  let [email, setEmail] = useState("");
+  let [password, setPassword] = useState("");
 
-    let navigate = useNavigate();
-    
+  let navigate = useNavigate();
 
-    let login=()=> {
+  let login = () => {
+    let Obj = {
+      method: "post",
+      url: `http://localhost:3001/login`,
+      data: {
+        email: email,
+        password: password,
+      },
+    };
 
-        let Obj={
-            method:"post",
-            url:`http://localhost:3001/login`,
-            data:{
-                email:email,
-                password:password
-            }
-        }
+    fetchDataFromApi(Obj)
+      .then((res) => {
+        console.log(res);
+        setUserData(res);
+        alert(res.response.data.message);
+      })
+      .catch((err) => {
+        alert(err.response.data.message);
+      });
+  };
+  if (userData) {
+    localStorage.setItem("Token", userData.token);
+    localStorage.setItem("UserId", userData.userId);
+    localStorage.setItem("ProfileUrl", userData.profileUrl);
 
-        fetchDataFromApi(Obj).then((res) => {
-          console.log(res);
-          setUserData(res);
-        });
-
-        
-    }
-    if(userData){
-        localStorage.setItem('Token', userData.token );
-        localStorage.setItem('UserId', userData.userId );
-        localStorage.setItem('ProfileUrl', userData.profileUrl );
-        
-        navigate("/home") 
-    }
-
-
+    navigate("/home");
+  }
 
   return (
     <div className="fullbody">
-        <Header/>
+      <Header />
       <div className="login-container">
         <div className="screen">
           <div className="screen__content">
-            <form className="login">
+            <div className="login">
               <div className="login__field">
                 <i className="login__icon fas fa-user"></i>
                 <input
-                onChange={(e)=>{setEmail(e.target.value)}}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
                   type="text"
                   className="login__input"
                   placeholder="User name / Email"
@@ -59,19 +60,29 @@ const UserLogin = () => {
               <div className="login__field">
                 <i className="login__icon fas fa-lock"></i>
                 <input
-                onChange={(e)=>{setPassword(e.target.value)}}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
                   type="password"
                   className="login__input"
                   placeholder="Password"
                 />
               </div>
-              <button onClick={()=>{login();}} className="button login__submit">
+              <button
+                onClick={() => {
+                  login();
+                }}
+                className="button login__submit"
+              >
                 <span className="button__text">Log In Now</span>
                 <i className="button__icon fas fa-chevron-right"></i>
               </button>
-            </form>
+            </div>
             <div className="social-login">
               <h3>log in my site</h3>
+              <p class="para-2">
+              Don't Have an Account? <a href="register">Sign Up</a>
+              </p>
               <div className="social-icons">
                 <a href="#" className="social-login__icon fab fa-instagram"></a>
                 <a href="#" className="social-login__icon fab fa-facebook"></a>

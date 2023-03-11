@@ -3,15 +3,13 @@ import { useNavigate } from "react-router-dom";
 
 function Header() {
   let navigate = useNavigate();
-  let [profileUrl, setProfileUrl]=useState();
-  
-  if(localStorage.getItem("ProfileUrl")){
-    if (!profileUrl) {
-       setProfileUrl(localStorage.getItem("ProfileUrl"));
-    }
+  let [profileUrl, setProfileUrl] = useState();
 
+  if (localStorage.getItem("ProfileUrl")) {
+    if (!profileUrl) {
+      setProfileUrl(localStorage.getItem("ProfileUrl"));
+    }
   }
-  console.log(localStorage.getItem("ProfileUrl"));
 
   let login = () => {
     if (localStorage.getItem("UserId")) {
@@ -29,8 +27,10 @@ function Header() {
     }
   };
 
+ 
+
   return (
-    <div>
+    <div id="myHeader">
       <nav className="navbar navbar-inverse">
         <div className="container-fluid">
           <div className="navbar-header">
@@ -97,7 +97,21 @@ function Header() {
                 </a>
               </li>
               <li>
-                <img style={{width:'40px', marginTop:"15px" , borderRadius:"40%"}} alt="avatar" src={profileUrl?profileUrl:"https://cdn-icons-png.flaticon.com/512/924/924874.png"}/>
+                <img
+                  style={{
+                    width: "30px",
+                    height:"30px",
+                    marginTop: "10px",
+                    borderRadius: "50%",
+                    borderBlockColor:"white"
+                  }}
+                  alt="avatar"
+                  src={
+                    profileUrl
+                      ? profileUrl
+                      : "https://cdn-icons-png.flaticon.com/512/924/924874.png"
+                  }
+                />
               </li>
             </ul>
           </div>
