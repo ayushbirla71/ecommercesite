@@ -92,76 +92,19 @@ const Home = () => {
         </div>
       </nav> */}
 
-      <div className="container" style={{ display: "flex" }}>
-        <div>
-          <div className="col-sm-4" >
-            <div className="panel panel-danger" style={{ width: "300px" }}>
-              <div className="panel-heading">BLACK FRIDAY DEAL</div>
-              <div className="panel-body">
-                <img
-                  src={
-                    "https://classroom-training-bucket.s3.ap-south-1.amazonaws.com/project-5/12629.jpeg"
-                  }
-                  className="img-responsive"
-                  style={{ width: "100%" }}
-                  alt="Image"
-                />
-              </div>
-              <div className="panel-footer">
-                Buy 50 mobiles and get a gift card
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div
-          className="row"
-          style={{ minWidth: "110px", display: "flex", overflowX: "auto" }}
-        >
-          {products.map((item, index) => {
-            return (
-              <div className="col-sm-4" >
-                <div className="panel panel-primary" style={{ width: "300px" }}>
-                  <div className="panel-heading">{item.title}</div>
-                  <div className="panel-body"> 
-                
-                <img 
-                      src={
-                        "https://classroom-training-bucket.s3.ap-south-1.amazonaws.com/project-5/12629.jpeg"
-                      }
-                      className="img-responsive"
-                      style={{ width: "100%"  }}
-                      alt="Image"
-                    />
-                
-                   
-                  </div>
-                  <div className="panel-footer">
-                    <p>
-                      <label>Price</label> : {item.price} {item.currencyId}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-      <br />
-
       {/* Mobile Category Field */}
 
       <div className="container" style={{ display: "flex" }}>
-        <div className="col-sm-4">
-          <div className="panel panel-danger" style={{ width: "300px" }}>
+        <div className="col-sm-4"  style={{margin:"5px"}}>
+          <div className="panel panel-danger" style={{width:'250px'}}>
             <div className="panel-heading">BLACK FRIDAY DEAL</div>
             <div className="panel-body">
               <img
                 src={
-                  "https://classroom-training-bucket.s3.ap-south-1.amazonaws.com/project-5/12629.jpeg"
+                  "https://i1.wp.com/www.dazzlingdailydeals.com/wp-content/uploads/2016/11/November-Unlocked.jpg?resize=763%2C931"
                 }
                 className="img-responsive"
-                style={{ width: "100%" }}
+                style={{ width: "100%" ,height:"100%"}}
                 alt="Image"
               />
             </div>
@@ -173,20 +116,20 @@ const Home = () => {
 
         <div
           className="row"
-          style={{ minWidth: "110px", display: "flex", overflowX: "auto" }}
+          style={{ minWidth: "110px", display: "flex", overflowX: "auto", overflowY:"none"    }}
         >
           {products.map((item, index) => {
-            if(item.category=="Mobile"){
+            if(item.category==="Mobile"){
               return (
-                <div className="col-sm-4">
-                  <div className="panel panel-primary" style={{ width: "300px" }}>
+                <div className="col-sm-4"style={{marginTop:"10px"}} >
+                  <div className="panel panel-primary" >
                     <div className="panel-heading">{item.title}</div>
-                    <div className="panel-body">
-                    <a href={`productDetails/${item._id}/${item.category}`}  onClick={()=>{ItemDetails(products)}}>
+                    <div className="panel-body" style={{display:'flex',justifyContent:"center"}}>
+                    <a className="product" href={`productDetails/${item._id}/${item.category}`}  onClick={()=>{ItemDetails(products)}}>
                       <img
                         src={item.productImage}
                         className="img-responsive"
-                        style={{ width: "100%" }}
+                        style={{ width: "100%",height:"100%" }}
                         alt="Image"
                       />
                       </a>
@@ -206,78 +149,19 @@ const Home = () => {
       </div>
       <br />
 
-      {/* EarPhone Category Field */}
-
-      <div className="container" style={{ display: "flex" }}>
-        <div>
-          <div className="col-sm-4">
-            <div className="panel panel-danger" style={{ width: "300px" }}>
-              <div className="panel-heading">BLACK FRIDAY DEAL</div>
-              <div className="panel-body">
-                <img
-                  src={
-                    "https://classroom-training-bucket.s3.ap-south-1.amazonaws.com/project-5/12629.jpeg"
-                  }
-                  className="img-responsive"
-                  style={{ width: "100%" }}
-                  alt="Image"
-                />
-              </div>
-              <div className="panel-footer">
-                Buy 50 mobiles and get a gift card
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div
-          className="row"
-          style={{ minWidth: "110px", display: "flex", overflowX: "auto" }}
-        >
-          {products.map((item, index) => {
-            if(item.category=="EarPhone"){
-              return (
-                <div className="col-sm-4">
-                  <div className="panel panel-primary" style={{ width: "300px" }}>
-                    <div className="panel-heading">{item.title}</div>
-                    <div className="panel-body">
-                    <a href={`productDetails/${item._id}/${item.category}`}  onClick={()=>{ItemDetails()}}>
-                        <img
-                          src={item.productImage}
-                          className="img-responsive"
-                          style={{ width: "100%" }}
-                          alt="Image"
-                        />
-                        </a>
-                    </div>
-                    <div className="panel-footer">
-                      <p>
-                        <label>Price</label> : {item.price} {item.currencyId}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              );
-            }
-           
-          })}
-        </div>
-      </div>
-      <br />
-
       {/*  Laptop Category Field */}
 
       <div className="container" style={{ display: "flex" }}>
-        <div className="col-sm-4">
-          <div className="panel panel-danger" style={{ width: "300px" }}>
+        <div className="col-sm-4"  style={{margin:"5px"}}>
+          <div className="panel panel-danger" style={{width:'250px'}}>
             <div className="panel-heading">BLACK FRIDAY DEAL</div>
             <div className="panel-body">
               <img
                 src={
-                  "https://classroom-training-bucket.s3.ap-south-1.amazonaws.com/project-5/12629.jpeg"
+                  "https://i1.wp.com/www.dazzlingdailydeals.com/wp-content/uploads/2016/11/November-Unlocked.jpg?resize=763%2C931"
                 }
                 className="img-responsive"
-                style={{ width: "100%" }}
+                style={{ width: "100%" ,height:"100%"}}
                 alt="Image"
               />
             </div>
@@ -294,18 +178,18 @@ const Home = () => {
           {products.map((item, index) => {
             if(item.category=="Laptop"){
               return (
-                <div className="col-sm-4">
-                  <div className="panel panel-primary" style={{ width: "300px" }}>
+                <div className="col-sm-4"style={{marginTop:"10px"}} >
+                  <div className="panel panel-primary" >
                     <div className="panel-heading">{item.title}</div>
-                    <div className="panel-body">
-                    <a href={`productDetails/${item._id}/${item.category}`}  onClick={()=>{ItemDetails()}}>
-                        <img
-                          src={item.productImage}
-                          className="img-responsive"
-                          style={{ width: "100%" }}
-                          alt="Image"
-                        />
-                        </a>
+                    <div className="panel-body" style={{display:'flex', justifyContent:"center"}}>
+                    <a className="product" href={`productDetails/${item._id}/${item.category}`}  onClick={()=>{ItemDetails(products)}}>
+                      <img
+                        src={item.productImage}
+                        className="img-responsive"
+                        style={{ width: "100%",height:"100%" }}
+                        alt="Image"
+                      />
+                      </a>
                     </div>
                     <div className="panel-footer">
                       <p>
@@ -316,124 +200,14 @@ const Home = () => {
                 </div>
               );
             }
-          
-          })}
-        </div>
-      </div>
-      <br />
-
-      {/*  Bluthooth Category Field */}
-
-      <div className="container" style={{ display: "flex" }}>
-        <div>
-          <div className="col-sm-4">
-            <div className="panel panel-danger" style={{ width: "300px" }}>
-              <div className="panel-heading">BLACK FRIDAY DEAL</div>
-              <div className="panel-body">
-                <img
-                  src={
-                    "https://classroom-training-bucket.s3.ap-south-1.amazonaws.com/project-5/12629.jpeg"
-                  }
-                  className="img-responsive"
-                  style={{ width: "100%" }}
-                  alt="Image"
-                />
-              </div>
-              <div className="panel-footer">
-                Buy 50 mobiles and get a gift card
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div
-          className="row"
-          style={{ minWidth: "110px", display: "flex", overflowX: "auto" }}
-        >
-          {products.map((item, index) => {
-            return (
-              <div className="col-sm-4">
-                <div className="panel panel-primary" style={{ width: "300px" }}>
-                  <div className="panel-heading">{item.title}</div>
-                  <div className="panel-body">
-                    <img
-                      src={
-                        "https://classroom-training-bucket.s3.ap-south-1.amazonaws.com/project-5/12629.jpeg"
-                      }
-                      className="img-responsive"
-                      style={{ width: "100%" }}
-                      alt="Image"
-                    />
-                  </div>
-                  <div className="panel-footer">
-                    <p>
-                      <label>Price</label> : {item.price} {item.currencyId}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-      <br />
-
-      {/*  Mouse Category Field */}
-
-      <div className="container" style={{ display: "flex" }}>
-        <div className="col-sm-4">
-          <div className="panel panel-danger" style={{ width: "300px" }}>
-            <div className="panel-heading">BLACK FRIDAY DEAL</div>
-            <div className="panel-body">
-              <img
-                src={
-                  "https://classroom-training-bucket.s3.ap-south-1.amazonaws.com/project-5/12629.jpeg"
-                }
-                className="img-responsive"
-                style={{ width: "100%" }}
-                alt="Image"
-              />
-            </div>
-            <div className="panel-footer">
-              Buy 50 mobiles and get a gift card
-            </div>
-          </div>
-        </div>
-
-        <div
-          className="row"
-          style={{ minWidth: "110px", display: "flex", overflowX: "auto" }}
-        >
-          {products.map((item, index) => {
-            return (
-              <div className="col-sm-4">
-                <div className="panel panel-primary" style={{ width: "300px" }}>
-                  <div className="panel-heading">{item.title}</div>
-                  <div className="panel-body">
-                    <img
-                      src={
-                        "https://classroom-training-bucket.s3.ap-south-1.amazonaws.com/project-5/12629.jpeg"
-                      }
-                      className="img-responsive"
-                      style={{ width: "100%" }}
-                      alt="Image"
-                    />
-                  </div>
-                  <div className="panel-footer">
-                    <p>
-                      <label>Price</label> : {item.price} {item.currencyId}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            );
+           
           })}
         </div>
       </div>
       <br />
 
       <footer className="container-fluid text-center">
-        <p>Online Store Copyright</p>
+        <p>Online Ecommerce Site</p>
         <form className="form-inline">
           Get deals:
           <input

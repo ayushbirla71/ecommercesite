@@ -5,8 +5,9 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import ItemDetails from "./components/Itemdetails/ItemDetails";
 import Product from "./components/products/Product";
 import CartDetails from "./components/cart/CartDetails";
+import UserSingUp from "./components/userDetails/UserSingUp";
 // import CartDetails from "./components/cart/CartDetails";
-
+  
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       <Route path="/UserProfile" element={<User/>}/>
       <Route path="/productList" element={<Product/>}/>
       <Route path="/Cart" element={<CartDetails/>}/>
+      <Route path="/register" element={<UserSingUp/>}/>
       <Route path='/productDetails/:productId/:category' element={<ItemDetails/>}/>
     </Routes>
     </BrowserRouter>

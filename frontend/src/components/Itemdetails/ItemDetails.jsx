@@ -12,6 +12,7 @@ const ItemDetails = () => {
   let [productDetails, setProductDetails] = useState(0);
   let [userId, setUserId] = useState();
   let [token, setToken] = useState(0);
+  let [Specifications, setProductSpecifications] = useState();
 
   if (token == 0) {
     setToken(localStorage.getItem("Token"));
@@ -53,12 +54,16 @@ const ItemDetails = () => {
         headers: { Authorization: `Bearer ${token}` },
         url: `http://localhost:3001/users/${userId}/cart`,
       };
-      fetchDataFromApi(Obj).then((res) => {
-        console.log(res);
-      });
-    }
-    else{
-      navigate("/login")
+      fetchDataFromApi(Obj)
+        .then((res) => {
+          console.log(res);
+          alert("add successfully");
+        })
+        .catch((err) => {
+          navigate("/login");
+        });
+    } else {
+      navigate("/login");
     }
   };
 
@@ -73,24 +78,18 @@ const ItemDetails = () => {
           <div className="row">
             <div className="col-lg-2 order-lg-1 order-2">
               <ul className="image_list">
-                <li data-image="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713229/single_4.jpg">
-                  <img
-                    src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713229/single_4.jpg"
-                    alt=""
-                  />
-                </li>
-                <li data-image="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713228/single_2.jpg">
-                  <img
-                    src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713228/single_2.jpg"
-                    alt=""
-                  />
-                </li>
-                <li data-image="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713228/single_3.jpg">
-                  <img
-                    src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565713228/single_3.jpg"
-                    alt=""
-                  />
-                </li>
+                {productDetails?
+                productDetails.productImageList.map((item, index) => {
+                      return (
+                        <li data-image={item}>
+                          <img
+                            src={item}
+                            alt=""
+                          />
+                        </li>
+                      );
+                    }):''
+                  }
               </ul>
             </div>
             <div className="col-lg-4 order-lg-2 order-1">
@@ -115,14 +114,17 @@ const ItemDetails = () => {
                   </ol>
                 </nav>
                 <div className="product_name">
-                  {productDetails ? productDetails.title : ""} <br />{" "}
-                  {productDetails ? productDetails.description : ""}
+                  {productDetails ? productDetails.title : ""}
                 </div>
                 <div className="product-rating">
                   <span className="badge badge-success">
                     <i className="fa fa-star"></i> 4.5 Star
                   </span>{" "}
-                  <span className="rating-review">35 Ratings & 45 Reviews</span>
+                  <span className="rating-review">
+                    {" "}
+                    {productDetails ? productDetails.ratings : ""} Ratings &{" "}
+                    {productDetails ? productDetails.reviews : ""} Reviews
+                  </span>
                 </div>
                 <div>
                   {" "}
@@ -147,7 +149,7 @@ const ItemDetails = () => {
                   </span>
                   <br />{" "}
                   <span className="product_info">
-                    Warranty: 6 months warranty
+                    Warranty: {productDetails ? productDetails.warranty : ""}
                   </span>{" "}
                   <br />{" "}
                   <span className="product_info">
@@ -159,7 +161,10 @@ const ItemDetails = () => {
                   </span>
                   <br />{" "}
                   <span className="product_info">
-                    In Stock: 25 units sold this week
+                    In Stock:{" "}
+                    {productDetails
+                      ? productDetails.quantity
+                      : " 25 units sold this week"}
                   </span>{" "}
                 </div>
                 <div>
@@ -189,20 +194,33 @@ const ItemDetails = () => {
                       {" "}
                       <span className="product_options">RAM Options</span>
                       <br />{" "}
-                      <button className="btn btn-primary btn-sm">
-                        4 GB
-                      </button>{" "}
-                      <button className="btn btn-primary btn-sm">8 GB</button>{" "}
-                      <button className="btn btn-primary btn-sm">16 GB</button>{" "}
+                      {productDetails.ram
+                        ? productDetails.ram.map((item, index) => {
+                            return (
+                              <>
+                                <button className="btn btn-primary btn-sm">
+                                  {item} GB
+                                </button>{" "}
+                              </>
+                            );
+                          })
+                        : ""}
                     </div>
                     <div className="col-xs-6" style={{ marginLeft: "55px" }}>
                       {" "}
                       <span className="product_options">Storage Options</span>
                       <br />{" "}
-                      <button className="btn btn-primary btn-sm">
-                        500 GB
-                      </button>{" "}
-                      <button className="btn btn-primary btn-sm">1 TB</button>{" "}
+                      {productDetails.ram
+                        ? productDetails.InternlStorage.map((item, index) => {
+                            return (
+                              <>
+                                <button className="btn btn-primary btn-sm">
+                                  {item} GB
+                                </button>{" "}
+                              </>
+                            );
+                          })
+                        : ""}
                     </div>
                   </div>
                 </div>
@@ -232,7 +250,7 @@ const ItemDetails = () => {
                           id="quantity_dec_button"
                           className="quantity_dec quantity_control"
                         >
-                          <i className="fas fa-chevron-down"></i>
+                          <i className="fas fa-chevron-down" ></i>
                         </div>
                       </div>
                     </div>
@@ -277,24 +295,7 @@ const ItemDetails = () => {
           </div>
 
           <div className="container" style={{ display: "flex" }}>
-            <div className="col-sm-4">
-              <div className="panel panel-danger" style={{ width: "300px" }}>
-                <div className="panel-heading">BLACK FRIDAY DEAL</div>
-                <div className="panel-body">
-                  <img
-                    src={
-                      "https://classroom-training-bucket.s3.ap-south-1.amazonaws.com/project-5/12629.jpeg"
-                    }
-                    className="img-responsive"
-                    style={{ width: "100%" }}
-                    alt="Image"
-                  />
-                </div>
-                <div className="panel-footer">
-                  Buy 50 mobiles and get a gift card
-                </div>
-              </div>
-            </div>
+          
 
             <div
               className="row"
@@ -302,31 +303,51 @@ const ItemDetails = () => {
             >
               {products.map((item, index) => {
                 return (
-                  <div className="col-sm-4">
-                    <div
-                      className="panel panel-primary"
-                      style={{ width: "300px" }}
-                    >
-                      <div className="panel-heading">{item.title}</div>
-                      <div className="panel-body">
-                        <a
-                          href={`/productDetails/${item._id}/${item.category}`}
-                        >
-                          <img
-                            src={item.productImage}
-                            className="img-responsive"
-                            style={{ width: "100%" }}
-                            alt="Image"
-                          />
-                        </a>
-                      </div>
-                      <div className="panel-footer">
-                        <p>
-                          <label>Price</label> : {item.price} {item.currencyId}
-                        </p>
-                      </div>
+                  // <div className="col-sm-4">
+                  //   <div
+                  //     className="panel panel-primary"
+                  //     style={{ width: "300px", height: "285px" }}
+                  //   >
+                  //     <div className="panel-heading">{item.title}</div>
+                  //     <div className="panel-body">
+                  //       <a
+                  //         href={`/productDetails/${item._id}/${item.category}`}
+                  //       >
+                  //         <img
+                  //           src={item.productImage}
+                  //           className="img-responsive"
+                  //           style={{ height: "100%", width: "100%" }}
+                  //           alt="Image"
+                  //         />
+                  //       </a>
+                  //     </div>
+                  //     <div className="panel-footer">
+                  //       <p>
+                  //         <label>Price</label> : {item.price} {item.currencyId}
+                  //       </p>
+                  //     </div>
+                  //   </div>
+                  // </div>
+                  <div className="col-sm-4"style={{marginTop:"10px"}} >
+                  <div className="panel panel-primary" >
+                    <div className="panel-heading">{item.title}</div>
+                    <div className="panel-body" style={{display:'flex', justifyContent:"center"}}>
+                    <a className="product" href={`/productDetails/${item._id}/${item.category}`}>
+                      <img
+                        src={item.productImage}
+                        className="img-responsive"
+                        style={{ width: "100%",height:"100%" }}
+                        alt="Image"
+                      />
+                      </a>
+                    </div>
+                    <div className="panel-footer">
+                      <p>
+                        <label>Price</label> : {item.price} {item.currencyId}
+                      </p>
                     </div>
                   </div>
+                </div>
                 );
               })}
             </div>
@@ -348,6 +369,30 @@ const ItemDetails = () => {
             <div className="col-md-12">
               <table className="col-md-12">
                 <tbody>
+                <tr className="row mt-10">
+                    <td className="col-md-4">
+                      <span className="p_specification">Front Camera :</span>{" "}
+                    </td>
+                    <td className="col-md-8">
+                      <ul>
+                        <li>
+                          {productDetails ? productDetails.frontcam : ""}
+                        </li>
+                      </ul>
+                    </td>
+                  </tr>
+                  <tr className="row mt-10">
+                    <td className="col-md-4">
+                      <span className="p_specification">Back Camera :</span>{" "}
+                    </td>
+                    <td className="col-md-8">
+                      <ul>
+                        <li>
+                          {productDetails ? productDetails.backcam : ""}
+                        </li>
+                      </ul>
+                    </td>
+                  </tr>
                   <tr className="row mt-10">
                     <td className="col-md-4">
                       <span className="p_specification">Sales Package :</span>{" "}
@@ -367,7 +412,9 @@ const ItemDetails = () => {
                     </td>
                     <td className="col-md-8">
                       <ul>
-                        <li> 14-dh0107TU </li>
+                        <li>
+                          {productDetails ? productDetails.moduleNumber : ""}
+                        </li>
                       </ul>
                     </td>
                   </tr>
@@ -387,7 +434,7 @@ const ItemDetails = () => {
                     </td>
                     <td className="col-md-8">
                       <ul>
-                        <li>Black</li>
+                        <li>{productDetails ? productDetails.color : ""}</li>
                       </ul>
                     </td>
                   </tr>
@@ -397,17 +444,31 @@ const ItemDetails = () => {
                     </td>
                     <td className="col-md-8">
                       <ul>
-                        <li>Processing & Multitasking</li>
+                        <li>
+                          {productDetails ? productDetails.suitablelity : ""}
+                        </li>
                       </ul>
                     </td>
                   </tr>
                   <tr className="row mt-10">
                     <td className="col-md-4">
-                      <span className="p_specification">Processor Brand :</span>{" "}
+                      <span className="p_specification">Processor :</span>{" "}
                     </td>
                     <td className="col-md-8">
                       <ul>
-                        <li>Intel</li>
+                        <li>
+                          {productDetails ? productDetails.processer : ""}
+                        </li>
+                      </ul>
+                    </td>
+                  </tr>
+                  <tr className="row mt-10">
+                    <td className="col-md-4">
+                      <span className="p_specification">Brand :</span>{" "}
+                    </td>
+                    <td className="col-md-8">
+                      <ul>
+                        <li>{productDetails ? productDetails.brand : ""}</li>
                       </ul>
                     </td>
                   </tr>

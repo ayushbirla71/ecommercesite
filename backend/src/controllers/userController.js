@@ -10,9 +10,10 @@ const createUser = async function (req, res) {
     try {
         let data = req.body
         let { fname, lname, email, phone, password, address } = data
-        let files = req.files
-        if (files.length == 0)return res.status(400).send({ status: false, message: "Please provide Profile Image" })
-        data.profileImage = await getImage(files)
+        console.log(data);
+       // let files = req.files
+      //  if (files.length == 0)return res.status(400).send({ status: false, message: "Please provide Profile Image" })
+      //  data.profileImage = await getImage(files)
 
         if (Object.keys(data).length == 0)return res.status(400).send({ status: false, message: "Please provide data" })
         if (!fname)return res.status(400).send({ status: false, message: "Please provide First Name" })
@@ -23,7 +24,7 @@ const createUser = async function (req, res) {
         if (!isValidEmail(email))return res.status(400).send({ status: false, message: "Please provide valid Email Id" })
 
         let emailExist = await userModel.findOne({ email: email })
-        if (emailExist)return res.status(400).send({ status: false, msg: "Email ID already exist" })
+        if (emailExist)return res.status(400).send({ status: false, message: "Email ID already exist" })
 
         if (!phone)return res.status(400).send({ status: false, message: "Please provide Phone" })
         if (!isValidPhone(phone))return res.status(400).send({ status: false, message: "Please provide valid Phone Number" })
@@ -41,8 +42,8 @@ const createUser = async function (req, res) {
         data.password = secPass
 
         if (!address)return res.status(400).send({ status: false, message: "Please provide Address" })
-        data.address = JSON.parse(address)
-        address = JSON.parse(address)
+        // data.address = JSON.parse(address)
+        // address = JSON.parse(address)
 
         let { shipping, billing } = address
 
@@ -105,7 +106,7 @@ const userLogin = async (req, res) => {
             return res.status(400).send({ status: false, message: "Please provide valid Email Id" })
         }
         let userDetails = await userModel.findOne({ email })
-        if (!userDetails) { return res.status(404).send({ status: false, message: "This email not exist" }) }
+        if (!userDetails) { return res.status(404).send({ status: false, message: "User not registered" }) }
         let hash = userDetails.password
         let finalPaswword = (result) => {
             if (result == true) {
@@ -170,8 +171,9 @@ const UpdateUser = async function (req, res) {
         let checkUser = await userModel.findById(userId)
         if (!checkUser) return res.status(404).send({ status: false, message: "User not found" })
         let data = req.body
-        if (Object.keys(data).length == 0) return res.status(400).send({ status: false, message: 'body cant be empty' })
+       //  if (Object.keys(data).length == 0) return res.status(400).send({ status: false, message: 'body cant be empty' })
         let files = req.files
+        console.log(req.headers);
         if (files.length != 0) {
             data.profileImage = await getImage(files)
         }
