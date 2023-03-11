@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState } from "react";
 import { fetchDataFromApi } from "../../utils/api";
 import { useParams, useNavigate } from "react-router-dom";
 
@@ -12,16 +12,16 @@ const ItemDetails = () => {
   let [productDetails, setProductDetails] = useState(0);
   let [userId, setUserId] = useState();
   let [token, setToken] = useState(0);
-  let [Specifications, setProductSpecifications] = useState();
+  // let [Specifications, setProductSpecifications] = useState();
 
-  if (token == 0) {
+  if (token === 0) {
     setToken(localStorage.getItem("Token"));
     setUserId(localStorage.getItem("UserId"));
   }
 
   console.log(category);
 
-  if (productDetails == 0) {
+  if (productDetails === 0) {
     let Obj = {
       method: "get",
       url: `http://localhost:3001/products/${productId}`,
@@ -32,7 +32,7 @@ const ItemDetails = () => {
     });
   }
 
-  if (products.length == 0) {
+  if (products.length === 0) {
     let Obj = {
       method: "get",
       params: { category: category },

@@ -7,7 +7,7 @@ import "./product.css";
 const Product = () => {
   let [productsList, setproductslist] = useState([]);
 
-  if (productsList.length == 0) {
+  if (productsList.length === 0) {
     let Obj = {
       method: "get",
       url: `http://localhost:3001/products`,

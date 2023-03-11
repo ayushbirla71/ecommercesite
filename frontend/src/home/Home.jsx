@@ -14,7 +14,7 @@ const Home = () => {
   //   })
   //  }
 
-  if (products.length == 0) {
+  if (products.length === 0) {
     let Obj={
       method:"get",
       url:`http://localhost:3001/products`,
@@ -176,7 +176,7 @@ const Home = () => {
           style={{ minWidth: "110px", display: "flex", overflowX: "auto" }}
         >
           {products.map((item, index) => {
-            if(item.category=="Laptop"){
+            if(item.category==="Laptop"){
               return (
                 <div className="col-sm-4"style={{marginTop:"10px"}} >
                   <div className="panel panel-primary" >

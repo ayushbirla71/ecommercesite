@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { fetchDataFromApi } from "../../utils/api";
 import Header from "../header/Header";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "./cart.css";
 
 const CartDetails = () => {
@@ -11,9 +11,9 @@ const CartDetails = () => {
   let [items, setItemsList] = useState([]);
   let [products, setproductlist] = useState([]);
   const { productId, category } = useParams();
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
 
-  if (token == 0) {
+  if (token === 0) {
     setToken(localStorage.getItem("Token"));
     setUserId(localStorage.getItem("UserId"));
   }
@@ -33,7 +33,7 @@ const CartDetails = () => {
       })
   }
 
-  if (products.length == 0) {
+  if (products.length === 0) {
     let Obj = {
       method: "get",
       params: { category: category },
