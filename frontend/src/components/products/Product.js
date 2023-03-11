@@ -10,7 +10,7 @@ const Product = () => {
   if (productsList.length === 0) {
     let Obj = {
       method: "get",
-      url: `http://localhost:3001/products`,
+      url: `/products`,
     };
     fetchDataFromApi(Obj).then((res) => {
       console.log(res);

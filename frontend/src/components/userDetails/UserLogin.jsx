@@ -14,7 +14,7 @@ const UserLogin = () => {
   let login = () => {
     let Obj = {
       method: "post",
-      url: `http://localhost:3001/login`,
+      url: `/login`,
       data: {
         email: email,
         password: password,

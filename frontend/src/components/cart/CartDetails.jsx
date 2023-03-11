@@ -21,7 +21,7 @@ const CartDetails = () => {
   if (!cartDetails) {
     let Obj = {
       method: "get",
-      url: `http://localhost:3001/users/${userId}/cart`,
+      url: `/users/${userId}/cart`,
       headers: { Authorization: `Bearer ${token}` },
     };
     console.log(userId);
@@ -37,7 +37,7 @@ const CartDetails = () => {
     let Obj = {
       method: "get",
       params: { category: category },
-      url: `http://localhost:3001/products`,
+      url: `/products`,
     };
     fetchDataFromApi(Obj).then((res) => {
       console.log(res);
@@ -49,7 +49,7 @@ const CartDetails = () => {
       method: "post",
 
       headers: { Authorization: `Bearer ${token}` },
-      url: `http://localhost:3001/users/${userId}/cart`,
+      url: `/users/${userId}/cart`,
 
       data: {
         productId: Id,
@@ -68,7 +68,7 @@ const CartDetails = () => {
       method: "put",
 
       headers: { Authorization: `Bearer ${token}` },
-      url: `http://localhost:3001/users/${userId}/cart`,
+      url: `/users/${userId}/cart`,
 
       data: {
         productId: Id,

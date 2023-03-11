@@ -114,10 +114,11 @@ const userLogin = async (req, res) => {
                     {
                         userId: userDetails._id.toString(),
                     },
-                    "project05", {
+                    "project05", 
+                //     {
 
-                    expiresIn: '24h'
-                }
+                //     expiresIn: '24h'
+                // }
                 );
                 let userId = userDetails._id
                 res.setHeader("x-auth-token", token);

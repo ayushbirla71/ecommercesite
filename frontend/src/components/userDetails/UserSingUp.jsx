@@ -21,7 +21,7 @@ const UserSingUp = () => {
   let SingUp = () => {
     let Obj = {
       method: "post",
-      url: `http://localhost:3001/register`,
+      url: `/register`,
       data: {
         email: Email,
         password: password,

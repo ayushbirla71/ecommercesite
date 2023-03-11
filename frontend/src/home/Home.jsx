@@ -17,7 +17,7 @@ const Home = () => {
   if (products.length === 0) {
     let Obj={
       method:"get",
-      url:`http://localhost:3001/products`,
+      url:`/products`,
   }
     fetchDataFromApi(Obj).then((res) => {
       console.log(res);
@@ -116,7 +116,7 @@ const Home = () => {
 
         <div
           className="row"
-          style={{ minWidth: "110px", display: "flex", overflowX: "auto", overflowY:"none"    }}
+          style={{ minWidth: "110px", display:"flex", overflowX: "scroll", msOverflowStyle:"none", }}
         >
           {products.map((item, index) => {
             if(item.category==="Mobile"){

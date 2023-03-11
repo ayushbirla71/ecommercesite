@@ -18,7 +18,7 @@ const User = () => {
   if (!userDetails) {
     let Obj = {
       method: "get",
-      url: `http://localhost:3001/user/${userId}/profile`,
+      url: `/user/${userId}/profile`,
       headers: { Authorization: `Bearer ${token}` },
     };
     console.log(userId);
@@ -48,7 +48,7 @@ const User = () => {
       formData.append("photo", file);
       let Obj = {
         method: "put",
-        url: `http://localhost:3001/user/${userId}/profile`,
+        url: `/user/${userId}/profile`,
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",

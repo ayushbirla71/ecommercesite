@@ -24,7 +24,7 @@ const ItemDetails = () => {
   if (productDetails === 0) {
     let Obj = {
       method: "get",
-      url: `http://localhost:3001/products/${productId}`,
+      url: `/products/${productId}`,
     };
     fetchDataFromApi(Obj).then((res) => {
       console.log(res);
@@ -36,7 +36,7 @@ const ItemDetails = () => {
     let Obj = {
       method: "get",
       params: { category: category },
-      url: `http://localhost:3001/products`,
+      url: `/products`,
     };
     fetchDataFromApi(Obj).then((res) => {
       console.log(res);
@@ -52,7 +52,7 @@ const ItemDetails = () => {
           productId: productId,
         },
         headers: { Authorization: `Bearer ${token}` },
-        url: `http://localhost:3001/users/${userId}/cart`,
+        url: `/users/${userId}/cart`,
       };
       fetchDataFromApi(Obj)
         .then((res) => {
@@ -298,8 +298,8 @@ const ItemDetails = () => {
           
 
             <div
-              className="row"
-              style={{ minWidth: "110px", display: "flex", overflowX: "auto" }}
+              className="row" id="productsList"
+              style={{ minWidth: "110px", display: "flex", overflowX: "auto" ,}}
             >
               {products.map((item, index) => {
                 return (
