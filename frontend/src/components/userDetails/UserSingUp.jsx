@@ -57,8 +57,11 @@ const UserSingUp = () => {
 
   return (
     <div className="fullbody">
-      <Header />
-      <div>
+      <div className="header-fixed" style={{position:"fixed"}}>
+
+<Header/>
+</div>
+      <div style={{marginTop:"4%"}}>
         <div>
           <h1 className="H1">Sign Up</h1>
           <h4 className="H4">It's free and only takes a minute</h4>

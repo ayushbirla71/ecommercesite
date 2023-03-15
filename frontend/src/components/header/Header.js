@@ -30,7 +30,7 @@ function Header() {
  
 
   return (
-    <div id="myHeader">
+    <div id="myHeader" >
       <nav className="navbar navbar-inverse">
         <div className="container-fluid">
           <div className="navbar-header">

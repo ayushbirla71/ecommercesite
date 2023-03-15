@@ -42,8 +42,9 @@ const productSchema = new mongoose.Schema({
     processer:{type:String},
     frontcam:{type:String},
     backcam:{type:String},
-    color:String,
+    color:{type:String, default:"black"},
     warranty:String,
+    cancellable:{type:Boolean,default:true},
     
 
     /// Laptop //

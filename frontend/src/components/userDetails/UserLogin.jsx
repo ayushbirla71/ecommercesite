@@ -41,8 +41,11 @@ const UserLogin = () => {
 
   return (
     <div className="fullbody">
-      <Header />
-      <div className="login-container">
+       <div className="header-fixed" style={{position:"fixed"}}>
+
+<Header/>
+</div>
+      <div className="login-container" style={{marginTop:"4%"}}>
         <div className="screen">
           <div className="screen__content">
             <div className="login">

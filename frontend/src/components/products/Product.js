@@ -20,12 +20,15 @@ const Product = () => {
 
   return (
     <div>
-      <Header />
-      <div className="container">
+    <div className="header-fixed" style={{position:"fixed"}}>
+
+<Header/>
+</div>
+      <div className="container" style={{width:"100%"}}>
         <div>
           {productsList.map((item, index) => {
             return (
-              <div className="col-sm-4" style={{ marginTop: "10px",textAlign:"center", display:'flex', justifyItems:"center" }}>
+              <div className="col-sm-4" style={{ marginTop: "10px",textAlign:"center", justifyItems:"center", marginLeft:"0%" ,maxWidth:"300px"}}>
                 <div className="panel panel-primary">
                   <div className="panel-heading">{item.title}</div>
                   <div
@@ -38,11 +41,12 @@ const Product = () => {
                       onClick={() => {
                         ItemDetails();
                       }}
+                      style={{ textAlign:"center"}}
                     >
                       <img
                         src={item.productImage}
                         className="img-responsive"
-                        style={{ width: "100%", height: "100%" }}
+                        style={{ width: "100%", height: "100%" ,textAlign:"center"}}
                         alt="Image"
                       />
                     </a>

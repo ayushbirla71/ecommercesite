@@ -15,7 +15,9 @@
   }
 
   /* .row{
-    height: 350px;
+    height: 340px;
+    margin-top: 0%;
+    margin-left: 0%;
   } */
 
   /* .col-sm-4{
@@ -29,4 +31,19 @@
   .panel-body{
     width: 250px;
     height: 200px;
+  }
+
+  .header-fixed {
+    position: fixed;
+    box-shadow: black ;
+    z-index: 9;
+    left: 0%;
+    right: 0%;
+    top: 0%;
+  }
+
+  .container{
+margin-top: 5%;
+width: 98%;
+
   }

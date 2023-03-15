@@ -24,9 +24,9 @@ mongoose.connect("mongodb+srv://ayush8120:GeGo5qhr7wM6VQyg@cluster0.n1nevi5.mong
 app.use('/',route)
 
 
-app.use((req, res) => {
-    res.status(404).send({ status: false, message: "Url not found" })
-})
+// app.use((req, res) => {
+//     res.status(404).send({ status: false, message: "Url not found" })
+// })
 
 
 app.listen(process.env.PORT ||3001,function ()

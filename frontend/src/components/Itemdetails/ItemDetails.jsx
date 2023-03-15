@@ -57,7 +57,7 @@ const ItemDetails = () => {
       fetchDataFromApi(Obj)
         .then((res) => {
           console.log(res);
-          alert("add successfully");
+          fn();
         })
         .catch((err) => {
           navigate("/login");
@@ -67,10 +67,20 @@ const ItemDetails = () => {
     }
   };
 
+  function fn() {
+    var w = window.open('', '20', 'width=30,height=2px')
+    w.document.write('Product has been added to your Order List !')
+    w.focus()
+    setTimeout(function () { w.close(); }, 2000);
+}
+
   return (
     <div className="super_container">
-      <Header />
-      <div className="single_product">
+     <div className="header-fixed" style={{position:"fixed"}}>
+
+<Header/>
+</div>
+      <div className="single_product" style={{marginTop:"4%"}}>
         <div
           className="container-fluid"
           style={{ backgroundColor: "#fff", padding: "11px" }}
@@ -262,6 +272,7 @@ const ItemDetails = () => {
                       className="btn btn-primary shop-button"
                       onClick={() => {
                         aadToCart();
+                       
                       }}
                     >
                       Add to Cart

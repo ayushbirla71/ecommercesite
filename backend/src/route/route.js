@@ -4,7 +4,7 @@ const link = require('../controllers/aws')
 const { createUser,userLogin,UpdateUser, getUserProfile } = require('../controllers/userController')
 const {createProduct, getProductByQuery, getProductById, deleteProductById, updateProduct}=require('../controllers/productController')
 const {createCart, updateCart, deleteCart, getCart}=require('../controllers/cartControllet')
-const { createOrder,updateOrder } = require('../controllers/orderController')
+const { createOrder,updateOrder,updateNewOrder ,getOrder} = require('../controllers/orderController')
 const { authenticationMid, authorizationMid } = require('../middleware/auth')
 
 
@@ -33,10 +33,12 @@ router.delete('/users/:userId/cart',authenticationMid,authorizationMid,deleteCar
 
 //------------------------Order -----------------//
 router.post('/users/:userId/orders',authenticationMid,authorizationMid,createOrder)
+router.get('/users/:userId/getOrders',authenticationMid,authorizationMid,getOrder)
 router.put('/users/:userId/orders',authenticationMid,authorizationMid,updateOrder)
+router.put('/users/:userId/ordersList',authenticationMid,authorizationMid,updateNewOrder)
 
 //------------------------ error ----------------//
-//router.all('/*',(req,res)=>{return res.status(400).send({status:false, message:"pls provide valid path"})})
+router.all('/*',(req,res)=>{return res.status(400).send({status:false, message:"pls provide valid path"})})
 
 
 module.exports = router

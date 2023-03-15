@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { fetchDataFromApi } from "../../utils/api";
 import Header from "../header/Header";
 import { useNavigate } from "react-router-dom";
+import { AiOutlineCamera } from "react-icons/ai";
 
 const User = () => {
   let [userDetails, setUserDetails] = useState(0);
@@ -58,14 +59,19 @@ const User = () => {
       fetchDataFromApi(Obj)
         .then((res) => {
           console.log(res);
-          localStorage.setItem("ProfileUrl",res.profileImage)
-           window.location.reload();
+          localStorage.setItem("ProfileUrl", res.profileImage);
+          window.location.reload();
         })
         .catch((err) => {
           console.log(err);
         });
     }
   };
+
+  let UpdateBtn = "none";
+  if (file) {
+    UpdateBtn = "block";
+  }
 
   const onInputChange = (e) => {
     setfile(e.target.files[0]);
@@ -83,35 +89,47 @@ const User = () => {
                   className="card-body text-center"
                   style={{ justifyContent: "center" }}
                 >
-               
-                  <img
-                    src={
-                      userDetails.profileImage != null
-                        ? userDetails.profileImage
-                        : "https://www.pngitem.com/pimgs/m/78-786501_black-avatar-png-user-icon-png-transparent-png.png"
-                    }
-                    alt="avatar"
-                    className="rounded-circle img-fluid"
-                    style={{
-                      cursor: "pointer",
-                      width: "150px",
-                      height: "150px",
-                      borderRadius: "50%",
-                    }}
-                   
-                  />
-                   
-  
+                  <div style={{justifyContent:"center"}}>
+                    <label>
+                      <img
+                        src={
+                          userDetails.profileImage != null
+                            ? userDetails.profileImage
+                            : "https://www.pngitem.com/pimgs/m/78-786501_black-avatar-png-user-icon-png-transparent-png.png"
+                        }
+                        alt="avatar"
+                        className="rounded-circle img-fluid"
+                        style={{
+                          cursor: "pointer",
+                          width: "150px",
+                          height: "150px",
+                          borderRadius: "50%",
+                        }}
+                      />
+
+                      <input
+                        type="file"
+                        name="photo"
+                        onChange={onInputChange}
+                        style={{ display: "none", color: "white" }}
+                      ></input>
+                    </label>
+
+
+                  <button
+                    type="submit"
+                    style={{ display: `${UpdateBtn}` , marginLeft:"45%"}}
+                    onClick={onFormSubmit}
+                  >
+                    Update
+                  </button>
+                  </div>
+
 
                   {/* <image
                     id="profileImage"
                     src="http://lorempixel.com/100/100"
                   /> */}
-                  <i className="fa fa camera" style={{color:"black"}}></i>
-                  <input type="file" name="photo" onChange={onInputChange} />
-                  <button type="submit" onClick={onFormSubmit}>
-                    Update
-                  </button>
 
                   <h5 className="my-3">{userDetails.fname}</h5>
                   <p className="text-muted mb-1">Full Stack Developer</p>

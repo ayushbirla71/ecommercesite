@@ -31,70 +31,15 @@ const Home = () => {
   //console.log(data);
   return (
     <div>
+      <div className="header-fixed" style={{position:"fixed"}}>
+
       <Header/>
-      {/* <div className="jumbotron">
-        <div className="container text-center">
-          <h1>Online Store</h1>
-          <p>Mission, Vission & Values</p>
-        </div>
       </div>
 
-      <nav className="navbar navbar-inverse">
-        <div className="container-fluid">
-          <div className="navbar-header">
-            <button
-              type="button"
-              className="navbar-toggle"
-              data-toggle="collapse"
-              data-target="#myNavbar"
-            >
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-            </button>
-            <a className="navbar-brand" href="#">
-              Logo
-            </a>
-          </div>
-          <div className="collapse navbar-collapse" id="myNavbar">
-            <ul className="nav navbar-nav">
-              <li className="active">
-                <a href="#">Home</a>
-              </li>
-              <li>
-                <a href="#">Products</a>
-              </li>
-              <li>
-                <a href="#">Deals</a>
-              </li>
-              <li>
-                <a href="#">Stores</a>
-              </li>
-              <li>
-                <a href="#">Contact</a>
-              </li>
-            </ul>
-            <ul className="nav navbar-nav navbar-right">
-              <li>
-                <a href="#">
-                  <span className="glyphicon glyphicon-user"></span> Your
-                  Account
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <span className="glyphicon glyphicon-shopping-cart"></span>{" "}
-                  Cart
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav> */}
 
       {/* Mobile Category Field */}
 
-      <div className="container" style={{ display: "flex" }}>
+      <div className="container" style={{ display: "flex" , marginTop:"5%" ,marginLeft:"0%" }}>
         <div className="col-sm-4"  style={{margin:"5px"}}>
           <div className="panel panel-danger" style={{width:'250px'}}>
             <div className="panel-heading">BLACK FRIDAY DEAL</div>
@@ -116,12 +61,13 @@ const Home = () => {
 
         <div
           className="row"
-          style={{ minWidth: "110px", display:"flex", overflowX: "scroll", msOverflowStyle:"none", }}
+          style={{ minWidth: "110px", display:"flex", overflowX: "scroll", msOverflowStyle:"none", overflowY:"hidden"}}
         >
-          {products.map((item, index) => {
+          {
+          products.map((item, index) => {
             if(item.category==="Mobile"){
               return (
-                <div className="col-sm-4"style={{marginTop:"10px"}} >
+                <div className="col-sm-4"style={{marginTop:"10px", marginRight:"0%"}} >
                   <div className="panel panel-primary" >
                     <div className="panel-heading">{item.title}</div>
                     <div className="panel-body" style={{display:'flex',justifyContent:"center"}}>
@@ -147,11 +93,11 @@ const Home = () => {
           })}
         </div>
       </div>
-      <br />
+     
 
       {/*  Laptop Category Field */}
 
-      <div className="container" style={{ display: "flex" }}>
+      <div className="container" style={{ display: "flex" , margin:"0%"}}>
         <div className="col-sm-4"  style={{margin:"5px"}}>
           <div className="panel panel-danger" style={{width:'250px'}}>
             <div className="panel-heading">BLACK FRIDAY DEAL</div>
@@ -173,7 +119,7 @@ const Home = () => {
 
         <div
           className="row"
-          style={{ minWidth: "110px", display: "flex", overflowX: "auto" }}
+          style={{ minWidth: "110px", display: "flex", overflowX: "auto",overflowY:"hidden" }}
         >
           {products.map((item, index) => {
             if(item.category==="Laptop"){

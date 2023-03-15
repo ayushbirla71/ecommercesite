@@ -41,51 +41,58 @@ This e-commerce site offers a wide variety of products and also provides some fe
 ## Screenshots
 The following screenshots provide a visual representation of the app:
 
-###### Home Page Dark Mode
-![CloudNotes Home Page Dark](./screenshots/homedarkmode.png "Home Page Dark Mode")
+###### Home Page
+![CloudNotes Home Page Dark](./frontend/screensorts/homePage.png "Home Page")
 <br>
 <br>
 <br>
 
-###### Home Page Light Mode
-![CloudNotes Home Page Light](./screenshots/homelightmode.png "Home Page Light Mode")
+###### Product List Page
+![CloudNotes Home Page Light](./frontend/screensorts/productList.png "Product List Page")
 <br>
 <br>
 <br>
 
-###### About Page Dark Mode
-![CloudNotes About Page Dark](./screenshots/aboutdarkmode.png "About Page Dark Mode")
+###### Product Details Page
+![CloudNotes About Page Dark](./frontend/screensorts/productDetails.png "Product Details Page")
 <br>
 <br>
 <br>
 
-###### About Page Light Mode
-![CloudNotes About Page Light](./screenshots/aboutlightmode.png "About Page Light Mode")
+###### SingUp page
+![CloudNotes About Page Light](./frontend/screensorts/registerPage.png "SingUp page")
 <br>
 <br>
 <br>
 
-###### Login Page Dark Mode
-![CloudNotes Login Page Dark](./screenshots/logindarkmode.png "Login Page Dark Mode")
+###### Login Page
+![CloudNotes Login Page Dark](./frontend/screensorts/logiPage.png "Login Page")
 <br>
 <br>
 <br>
 
-###### Login Page Light Mode
-![CloudNotes Login Page Light](./screenshots/loginlightmode.png "Login Page Light Mode")
+###### Your Profile Page
+![CloudNotes Login Page Light](./frontend/screensorts/userProfile.png "Your Profile Page")
 <br>
 <br>
 <br>
 
-###### SignUp Page Dark Mode
-![CloudNotes SignUp Page Dark](./screenshots/signupdarkmode.png "SignUp Page Dark Mode")
+###### Cart Page
+![CloudNotes SignUp Page Dark](./frontend/screensorts/shoppingCart.png "Cart Page")
 <br>
 <br>
 <br>
 
-###### SignUp Page Light Mode
-![CloudNotes SignUp Page Light](./screenshots/signuplightmode.png "SignUp Page Light Mode")
+###### Payment Details page
+![CloudNotes SignUp Page Light](./frontend/screensorts/cartDetails.png "Payment Details page")
 <br>
+<br>
+<br>
+
+###### Order list
+![CloudNotes SignUp Page Dark](./frontend/screensorts/orderList.png "Order list")
+<br>
+
 
 ## Credits
 This project uses several open-source libraries and tools:
