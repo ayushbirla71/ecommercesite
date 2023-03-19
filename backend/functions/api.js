@@ -26,7 +26,7 @@ app.use(`/.netlify/functions/api`, route);
 
 
 app.use((req, res) => {
-    res.status(404).send({ status: false, message: "Url not found" })
+   return res.status(404).send({ status: false, message: "Url not found" })
 })
 
 
