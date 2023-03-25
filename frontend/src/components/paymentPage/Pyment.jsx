@@ -1,10 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { fetchDataFromApi } from '../../utils/api';
 import "./payment.css";
 
 // import { PaymentIcon } from 'react-native-payment-icons';
 
 const Pyment = (PropsVal) => {
+    let navigat=useNavigate();
+
 
 
     let OrderPlace = () => {
@@ -21,9 +24,9 @@ const Pyment = (PropsVal) => {
           };
           fetchDataFromApi(Obj).then((res) => {
             console.log(res);
-            // setcartDetails(res);
-            // setItemsList(res.items);
             alert("order successful");
+            navigat('/OrderList')
+            
 
             window.location.reload();
           });
@@ -101,39 +104,6 @@ const Pyment = (PropsVal) => {
                 </form>
             </div>
         </div>
-
-        {/* <p className="examples-note">Here are some dummy credit card numbers and CVV codes so you can test out the form:</p>
-
-        <div className="examples">
-            <div className="table-responsive">
-                <table className="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Type</th>
-                            <th>Card Number</th>
-                            <th>Security Code</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Visa</td>
-                            <td>4716108999716531</td>
-                            <td>257</td>
-                        </tr>
-                        <tr>
-                            <td>Master Card</td>
-                            <td>5281037048916168</td>
-                            <td>043</td>
-                        </tr>
-                        <tr>
-                            <td>American Express</td>
-                            <td>342498818630298</td>
-                            <td>3156</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div> */}
     </div>
 
   )
