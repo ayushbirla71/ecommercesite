@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchDataFromApi } from "../../utils/api";
 import Header from "../header/Header";
 import { useNavigate } from "react-router-dom";
@@ -11,12 +11,10 @@ const User = () => {
   let navigate = useNavigate();
   let [file, setfile] = useState(null);
 
-  if (token === 0) {
+  useEffect(() => {
     setToken(localStorage.getItem("Token"));
     setUserId(localStorage.getItem("UserId"));
-  }
 
-  if (!userDetails) {
     let Obj = {
       method: "get",
       url: `/user/${userId}/profile`,
@@ -35,7 +33,7 @@ const User = () => {
     if (userDetails == null) {
       navigate("/login");
     }
-  }
+  });
 
   const LogOut = () => {
     localStorage.clear();
@@ -89,7 +87,7 @@ const User = () => {
                   className="card-body text-center"
                   style={{ justifyContent: "center" }}
                 >
-                  <div style={{justifyContent:"center"}}>
+                  <div style={{ justifyContent: "center" }}>
                     <label>
                       <img
                         src={
@@ -115,21 +113,14 @@ const User = () => {
                       ></input>
                     </label>
 
-
-                  <button
-                    type="submit"
-                    style={{ display: `${UpdateBtn}` , marginLeft:"45%"}}
-                    onClick={onFormSubmit}
-                  >
-                    Update
-                  </button>
+                    <button
+                      type="submit"
+                      style={{ display: `${UpdateBtn}`, marginLeft: "45%" }}
+                      onClick={onFormSubmit}
+                    >
+                      Update
+                    </button>
                   </div>
-
-
-                  {/* <image
-                    id="profileImage"
-                    src="http://lorempixel.com/100/100"
-                  /> */}
 
                   <h5 className="my-3">{userDetails.fname}</h5>
                   <p className="text-muted mb-1">Full Stack Developer</p>

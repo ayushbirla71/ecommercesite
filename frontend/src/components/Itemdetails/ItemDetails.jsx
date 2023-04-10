@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchDataFromApi } from "../../utils/api";
 import { useParams, useNavigate } from "react-router-dom";
 
@@ -12,7 +12,6 @@ const ItemDetails = () => {
   let [productDetails, setProductDetails] = useState(0);
   let [userId, setUserId] = useState();
   let [token, setToken] = useState(0);
-  // let [Specifications, setProductSpecifications] = useState();
 
   if (token === 0) {
     setToken(localStorage.getItem("Token"));
@@ -21,7 +20,7 @@ const ItemDetails = () => {
 
   console.log(category);
 
-  if (productDetails === 0) {
+  useEffect(() => {
     let Obj = {
       method: "get",
       url: `/products/${productId}`,
@@ -30,19 +29,17 @@ const ItemDetails = () => {
       console.log(res);
       setProductDetails(res);
     });
-  }
 
-  if (products.length === 0) {
-    let Obj = {
+    let obj = {
       method: "get",
       params: { category: category },
       url: `/products`,
     };
-    fetchDataFromApi(Obj).then((res) => {
+    fetchDataFromApi(obj).then((res) => {
       console.log(res);
       setproductlist(res);
     });
-  }
+  }, []);
 
   let aadToCart = () => {
     if (token) {
@@ -68,19 +65,20 @@ const ItemDetails = () => {
   };
 
   function fn() {
-    var w = window.open('', '20', 'width=30,height=2px')
-    w.document.write('Product has been added to your Order List !')
-    w.focus()
-    setTimeout(function () { w.close(); }, 2000);
-}
+    var w = window.open("", "20", "width=30,height=2px");
+    w.document.write("Product has been added to your Order List !");
+    w.focus();
+    setTimeout(function () {
+      w.close();
+    }, 2000);
+  }
 
   return (
     <div className="super_container">
-     <div className="header-fixed" style={{position:"fixed"}}>
-
-<Header/>
-</div>
-      <div className="single_product" style={{marginTop:"4%"}}>
+      <div className="header-fixed" style={{ position: "fixed" }}>
+        <Header />
+      </div>
+      <div className="single_product" style={{ marginTop: "4%" }}>
         <div
           className="container-fluid"
           style={{ backgroundColor: "#fff", padding: "11px" }}
@@ -88,18 +86,15 @@ const ItemDetails = () => {
           <div className="row">
             <div className="col-lg-2 order-lg-1 order-2">
               <ul className="image_list">
-                {productDetails?
-                productDetails.productImageList.map((item, index) => {
+                {productDetails
+                  ? productDetails.productImageList.map((item, index) => {
                       return (
                         <li data-image={item}>
-                          <img
-                            src={item}
-                            alt=""
-                          />
+                          <img src={item} alt="" />
                         </li>
                       );
-                    }):''
-                  }
+                    })
+                  : ""}
               </ul>
             </div>
             <div className="col-lg-4 order-lg-2 order-1">
@@ -260,7 +255,7 @@ const ItemDetails = () => {
                           id="quantity_dec_button"
                           className="quantity_dec quantity_control"
                         >
-                          <i className="fas fa-chevron-down" ></i>
+                          <i className="fas fa-chevron-down"></i>
                         </div>
                       </div>
                     </div>
@@ -272,7 +267,6 @@ const ItemDetails = () => {
                       className="btn btn-primary shop-button"
                       onClick={() => {
                         aadToCart();
-                       
                       }}
                     >
                       Add to Cart
@@ -306,59 +300,39 @@ const ItemDetails = () => {
           </div>
 
           <div className="container" style={{ display: "flex" }}>
-          
-
             <div
-              className="row" id="productsList"
-              style={{ minWidth: "110px", display: "flex", overflowX: "auto" ,}}
+              className="row"
+              id="productsList"
+              style={{ minWidth: "110px", display: "flex", overflowX: "auto" }}
             >
               {products.map((item, index) => {
                 return (
-                  // <div className="col-sm-4">
-                  //   <div
-                  //     className="panel panel-primary"
-                  //     style={{ width: "300px", height: "285px" }}
-                  //   >
-                  //     <div className="panel-heading">{item.title}</div>
-                  //     <div className="panel-body">
-                  //       <a
-                  //         href={`/productDetails/${item._id}/${item.category}`}
-                  //       >
-                  //         <img
-                  //           src={item.productImage}
-                  //           className="img-responsive"
-                  //           style={{ height: "100%", width: "100%" }}
-                  //           alt="Image"
-                  //         />
-                  //       </a>
-                  //     </div>
-                  //     <div className="panel-footer">
-                  //       <p>
-                  //         <label>Price</label> : {item.price} {item.currencyId}
-                  //       </p>
-                  //     </div>
-                  //   </div>
-                  // </div>
-                  <div className="col-sm-4"style={{marginTop:"10px"}} >
-                  <div className="panel panel-primary" >
-                    <div className="panel-heading">{item.title}</div>
-                    <div className="panel-body" style={{display:'flex', justifyContent:"center"}}>
-                    <a className="product" href={`/productDetails/${item._id}/${item.category}`}>
-                      <img
-                        src={item.productImage}
-                        className="img-responsive"
-                        style={{ width: "100%",height:"100%" }}
-                        alt="Image"
-                      />
-                      </a>
-                    </div>
-                    <div className="panel-footer">
-                      <p>
-                        <label>Price</label> : {item.price} {item.currencyId}
-                      </p>
+                  <div className="col-sm-4" style={{ marginTop: "10px" }}>
+                    <div className="panel panel-primary">
+                      <div className="panel-heading">{item.title}</div>
+                      <div
+                        className="panel-body"
+                        style={{ display: "flex", justifyContent: "center" }}
+                      >
+                        <a
+                          className="product"
+                          href={`/productDetails/${item._id}/${item.category}`}
+                        >
+                          <img
+                            src={item.productImage}
+                            className="img-responsive"
+                            style={{ width: "100%", height: "100%" }}
+                            alt="Image"
+                          />
+                        </a>
+                      </div>
+                      <div className="panel-footer">
+                        <p>
+                          <label>Price</label> : {item.price} {item.currencyId}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
                 );
               })}
             </div>
@@ -380,15 +354,13 @@ const ItemDetails = () => {
             <div className="col-md-12">
               <table className="col-md-12">
                 <tbody>
-                <tr className="row mt-10">
+                  <tr className="row mt-10">
                     <td className="col-md-4">
                       <span className="p_specification">Front Camera :</span>{" "}
                     </td>
                     <td className="col-md-8">
                       <ul>
-                        <li>
-                          {productDetails ? productDetails.frontcam : ""}
-                        </li>
+                        <li>{productDetails ? productDetails.frontcam : ""}</li>
                       </ul>
                     </td>
                   </tr>
@@ -398,9 +370,7 @@ const ItemDetails = () => {
                     </td>
                     <td className="col-md-8">
                       <ul>
-                        <li>
-                          {productDetails ? productDetails.backcam : ""}
-                        </li>
+                        <li>{productDetails ? productDetails.backcam : ""}</li>
                       </ul>
                     </td>
                   </tr>

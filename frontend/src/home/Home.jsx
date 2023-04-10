@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/header/Header";
 import ItemDetails from "../components/Itemdetails/ItemDetails";
 import { fetchDataFromApi } from "../utils/api";
@@ -7,14 +7,7 @@ import "./_home.css";
 const Home = () => {
   let [products, setproductlist] = useState([]);
 
-  //  if(!products){
-  //   Product().then((res)=>{
-  //    // console.log(res.props);
-  //      setproductlist(res.props);
-  //   })
-  //  }
-
-  if (products.length === 0) {
+  useEffect(() => {
     let Obj = {
       method: "get",
       url: `/products`,
@@ -23,12 +16,8 @@ const Home = () => {
       console.log(res);
       setproductlist(res);
     });
-  }
+  }, []);
 
-  //console.log(products)
-
-  //console.log(fetchDataFromApi("products","get"));
-  //console.log(data);
   return (
     <div>
       <div className="header-fixed" style={{ position: "fixed" }}>
@@ -70,7 +59,7 @@ const Home = () => {
             overflowY: "hidden",
           }}
         >
-          {products.map((item, index) => {
+          {products.map((item, key) => {
             if (item.category === "Mobile") {
               return (
                 <div
@@ -142,7 +131,7 @@ const Home = () => {
             overflowY: "hidden",
           }}
         >
-          {products.map((item, index) => {
+          {products.map((item, key) => {
             if (item.category === "Laptop") {
               return (
                 <div className="col-sm-4" style={{ marginTop: "10px" }}>
@@ -209,10 +198,9 @@ const Home = () => {
             display: "flex",
             overflowX: "auto",
             overflowY: "hidden",
-          
           }}
         >
-          {products.map((item, index) => {
+          {products.map((item, key) => {
             if (item.category === "Headphones") {
               return (
                 <div className="col-sm-4" style={{ marginTop: "10px" }}>

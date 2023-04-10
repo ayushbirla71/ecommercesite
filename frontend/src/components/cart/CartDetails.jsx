@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchDataFromApi } from "../../utils/api";
 import Header from "../header/Header";
 import { useNavigate, useParams } from "react-router-dom";
@@ -14,12 +14,7 @@ const CartDetails = () => {
   const { productId, category } = useParams();
   let navigate = useNavigate();
 
-  if (token === 0) {
-    setToken(localStorage.getItem("Token"));
-    setUserId(localStorage.getItem("UserId"));
-  }
-
-  if (!cartDetails) {
+  useEffect(() => {
     let Obj = {
       method: "get",
       url: `/users/${userId}/cart`,
@@ -31,19 +26,23 @@ const CartDetails = () => {
       setcartDetails(res);
       setItemsList(res.items);
     });
-  }
 
-  if (products.length === 0) {
-    let Obj = {
+    let obj = {
       method: "get",
       params: { category: category },
       url: `/products`,
     };
-    fetchDataFromApi(Obj).then((res) => {
+    fetchDataFromApi(obj).then((res) => {
       console.log(res);
       setproductlist(res);
     });
+  }, []);
+
+  if (token === 0) {
+    setToken(localStorage.getItem("Token"));
+    setUserId(localStorage.getItem("UserId"));
   }
+
   let incressProductQuantity = (Id) => {
     let Obj = {
       method: "post",
@@ -96,10 +95,9 @@ const CartDetails = () => {
 
   return (
     <div>
-     <div className="header-fixed" style={{position:"fixed"}}>
-
-<Header/>
-</div>
+      <div className="header-fixed" style={{ position: "fixed" }}>
+        <Header />
+      </div>
       <main className="page">
         <section className="shopping-cart dark">
           <div className="container">
@@ -114,7 +112,12 @@ const CartDetails = () => {
                   className="form-popup"
                   style={{ position: "fixed", display: "none" }}
                 >
-                  <Pyment token={token} userId={userId} cartDetails={cartDetails} items={items}/>
+                  <Pyment
+                    token={token}
+                    userId={userId}
+                    cartDetails={cartDetails}
+                    items={items}
+                  />
                 </div>
 
                 {/* Cart Details  */}
@@ -123,7 +126,7 @@ const CartDetails = () => {
                     <div className="items">
                       {items.map((item, index) => {
                         return (
-                          <div className="product">
+                          <div key={index} className="product">
                             <div className="row">
                               <div className="col-md-3">
                                 <img
@@ -157,7 +160,9 @@ const CartDetails = () => {
                                       </div>
                                     </div>
                                     <div className="col-md-4 quantity">
-                                      <label for="quantity">Quantity:</label>
+                                      <label htmlFor="quantity">
+                                        Quantity:
+                                      </label>
                                       <div style={{ textAlign: "center" }}>
                                         <button
                                           onClick={() => {
@@ -249,12 +254,12 @@ const CartDetails = () => {
               paddingTop: "30px",
               msOverflowStyle: "none",
               scrollbarWidth: "none",
-               overflowY:"hidden"
+              overflowY: "hidden",
             }}
           >
             {products.map((item, index) => {
               return (
-                <div className="col-sm-4">
+                <div key={index} className="col-sm-4">
                   <div
                     className="panel panel-primary"
                     style={{ width: "300px" }}
@@ -289,7 +294,9 @@ const CartDetails = () => {
       <button
         type="button"
         className="btn btn-primary btn-lg btn-block"
-        onClick={()=>{navigate('/Orderlist')}}
+        onClick={() => {
+          navigate("/Orderlist");
+        }}
       >
         Check Order List
       </button>
